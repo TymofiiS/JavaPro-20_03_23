@@ -1,10 +1,14 @@
 package hw4;
 
 public class Dog extends Animal {
-
+	
+	public static int countDogs;
+	
 	public Dog(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		
+		countDogs++;
+		System.out.println("Was(were) created " + countDogs + " dog(s)");
 	}
 	
 	int maxRunPath = 500;

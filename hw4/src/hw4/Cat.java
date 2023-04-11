@@ -1,12 +1,14 @@
 package hw4;
 
-import java.lang.constant.Constable;
-
 public class Cat extends Animal {
-
+	
+	public static int countCats;
+	
 	public Cat(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		
+		countCats++;
+		System.out.println("Was(were) created " + countCats + " cat(s)");
 	}
 	
 	int maxRunPath = 200;
