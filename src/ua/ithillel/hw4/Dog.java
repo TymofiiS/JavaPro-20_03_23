@@ -1,4 +1,4 @@
-package hw4;
+package ua.ithillel.hw4;
 
 public class Dog extends Animal {
 	

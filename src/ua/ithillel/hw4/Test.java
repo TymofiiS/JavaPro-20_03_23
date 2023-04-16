@@ -1,8 +1,8 @@
-package hw4;
+package ua.ithillel.hw4;
 
-public class Main {
+public class Test {
 
-	public static void main(String[] args) {
+	public static void Run() {
 		
 		var dog1 = new Dog("Dog1");
 		dog1.Run(50);
