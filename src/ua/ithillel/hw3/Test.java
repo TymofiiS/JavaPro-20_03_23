@@ -1,8 +1,8 @@
-package hw3_1;
+package ua.ithillel.hw3;
 
-public class Main {
+public class Test {
 
-	public static void main(String[] args) {
+	public static void Run() {
 		// TODO Auto-generated method stub
 		var employee = 
 				new Employee(null, null, null, null, null);

@@ -1,4 +1,4 @@
-package hw3_1;
+package ua.ithillel.hw3;
 
 public class Employee {
 	

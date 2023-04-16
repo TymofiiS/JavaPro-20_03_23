@@ -1,4 +1,4 @@
-package hw3_2;
+package ua.ithillel.hw3;
 
 public class SameName {
 
