@@ -1,13 +1,13 @@
 /*
 1. Створити порожній проект у IntelliJ IDEA, створити клас HomeWorkApp і прописати в ньому метод main().
+
 2. Створіть метод printThreeWords(), 
 який під час виклику повинен надрукувати в стовпець у три слова: Orange, Banana, Apple.
-
 Orange
 Banana
 Apple
 
-3. Створіть метод checkSumSign(), у тілі якого оголосіть дві int змінні a і b, 
+3. Створіть метод, у тілі якого оголосіть дві int змінні a і b, 
 та ініціалізуйте їх будь-якими значеннями, якими захочете. 
 Далі метод повинен підсумувати ці змінні, і якщо їх сума більша або дорівнює 0, 
 то вивести в консоль повідомлення "Сума позитивна", інакше - "Сума негативна";
@@ -56,7 +56,17 @@ public class Test {
 
 	public static void Run() {
 		// TODO Auto-generated method stub
-
+		System.out.println("ua.ithillel.hw5");
+		
+		HomeWorkApp.printThreeWords();
+		HomeWorkApp.checkSumSign();
+		HomeWorkApp.printColor();
+		HomeWorkApp.compareNumbers();
+		System.out.println(HomeWorkApp.checkLimits(15, 15));
+		HomeWorkApp.checkInputSign(-1);
+		System.out.println(HomeWorkApp.checkInputSignInvert(-15));
+		HomeWorkApp.printWordManyTimes("row", 1);
+		System.out.println(HomeWorkApp.checkYearIsLeap(8));
 	}
 
 }
