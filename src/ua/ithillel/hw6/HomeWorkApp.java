@@ -1,6 +1,7 @@
 package ua.ithillel.hw6;
 
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.Random;
 
 public class HomeWorkApp {
@@ -65,7 +66,7 @@ public class HomeWorkApp {
 	    var rnd = new Random().nextInt(words.length);
 	    var initialWord = words[rnd];
 	    
-	    //System.out.println("Initial word: " + initialWord);
+	    System.out.println("Initial word: " + initialWord);
 		
 		do {
 			// Get user guess
@@ -85,35 +86,26 @@ public class HomeWorkApp {
 	        }
 	        
 	        // Filling out correct characters
-	        var reply = "###############";
-	        for (int i = 0; i < reply.length(); i++)
+	        var reply = new char[15];
+	        Arrays.fill(reply, '#');
+
+	        for (int i = 0; i < reply.length; i++)
 	        {
 	        	if(initialWord.length() <= i) break;
 				if(guessWord.length() <= i) break;
 				
 				if(Character.compare(
 						initialWord.charAt(i), 
-						guessWord.charAt(i)) == 0) {
-					reply = 
-							replaceCharUsingCharArray(
-									reply, 
-									initialWord.charAt(i),
-									i);
-				}
+						guessWord.charAt(i)) == 0) 
+					reply[i] = initialWord.charAt(i);
 	        }
 	        
 	        // Show correct characters
-	        System.out.println("Current result: " + reply);
+	        System.out.println(
+	        		"Current result: " + String.valueOf(reply));
 		
 		} while (!exit);
 		
 		in.close();
-	}
-	
-	public static String replaceCharUsingCharArray(
-			String str, char ch, int index) {
-	    char[] chars = str.toCharArray();
-	    chars[index] = ch;
-	    return String.valueOf(chars);
 	}
 }
