@@ -65,7 +65,7 @@ public class HomeWorkApp {
 	    var rnd = new Random().nextInt(words.length);
 	    var initialWord = words[rnd];
 	    
-	    System.out.println("Initial word: " + initialWord);
+	    //System.out.println("Initial word: " + initialWord);
 		
 		do {
 			// Get user guess
