@@ -1,12 +1,10 @@
 package ua.ithillel.hw8;
 
-public class Run extends Skill {
+public class Run extends RunPass {
 
-	public Run(Integer limit, String dealWith) {
-		super(limit, dealWith);
+	public Run(Integer value) {
+		super(value);
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 }

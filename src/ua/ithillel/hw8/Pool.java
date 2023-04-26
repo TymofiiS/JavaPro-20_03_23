@@ -2,8 +2,8 @@ package ua.ithillel.hw8;
 
 public class Pool extends Obstacle {
 
-	public Pool(String name, Integer value) {
-		super(name, value);
+	public Pool(Integer value) {
+		super(value);
 		// TODO Auto-generated constructor stub
 	}
 

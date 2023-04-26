@@ -73,30 +73,16 @@ public class Test {
 		System.out.println("---------------------------");
 		System.out.println("Tasks 1-8");
 		
-		var wall = new Wall("wall", 2);
-		var runPass = new RunPass("run pass", 20);
-		var pool = new Pool("pool", 15);
-		Obstacle[] obstacles = { wall, runPass, pool};
+		Obstacle[] obstacles = {
+				new Wall(2), 
+				new RunPass(20),
+				new Pool(15)
+		};
 		
 		Participant[] participants = {
-				new Participant("Human",
-						List.of(
-								new Run(100, runPass.typeName()),
-								new Jump(3, wall.typeName()),
-								new Swim(30, pool.typeName())
-								)
-						),
-				new Participant("Cat",
-						List.of(
-								new Run(20, runPass.typeName()),
-								new Jump(2, wall.typeName())
-								)
-						),
-				new Participant("Robot",
-						List.of(
-								new Run(10, runPass.typeName()),
-								new Jump(2, wall.typeName()))
-								)
+				new Human(List.of(new Run(100), new Jump(3), new Swim(30))),
+				new Cat(List.of(new Run(20),new Jump(2))),
+				new Robot(List.of(new Run(10),new Jump(2)))
 		};
 		
 		Participant.Competition(obstacles, participants);

@@ -2,18 +2,15 @@ package ua.ithillel.hw8;
 
 public class Obstacle {
 	
-	private String _name;
 	private Integer _value;
 	
 	public Obstacle(
-			String name, 
 			Integer value) {
-		_name = name;
 		_value = value;
 	}
 
 	public String get_name() {
-		return _name;
+		return typeName().toLowerCase();
 	}
 
 	public Integer get_value() {
@@ -22,5 +19,9 @@ public class Obstacle {
 	
 	public String typeName() {
 		return this.getClass().getSimpleName();
+	}
+	
+	public String parentName() {
+		return this.getClass().getSuperclass().getSimpleName();
 	}
 }

@@ -4,23 +4,24 @@ import java.util.List;
 
 public class Participant {
 	
-	public List<Skill> _skills;
-	private String _name;
+	public List<Obstacle> _skills;
 	
 	public Participant(
-			String name,
-			List<Skill> skills) {
-		_name = name;
+			List<Obstacle> skills) {
 		_skills = skills;
 	}
 	
-	public Boolean Overcome(Obstacle obs) {
+	public String get_name() {
+		return this.getClass().getSimpleName();
+	}
+	
+	public Boolean Overcome(Obstacle obstacle) {
 		
 		// Find skill which deal with the obstacle
-		Skill skill = null;
+		Obstacle skill = null;
 		for (var entry : _skills) {
 			
-			if(obs.typeName() != entry.get_dealWith())
+			if(obstacle.typeName() != entry.parentName())
 			{continue;}
 			
 			// Get skill value
@@ -31,23 +32,23 @@ public class Participant {
 		// Check if skill exist
 		if(skill == null) {
 			System.out.println(
-					_name + " have no skill for overcome this obstacle: " 
-					+ obs.get_name());
+					get_name() + " have no skill for overcome this obstacle: " 
+					+ obstacle.get_name());
 			return false;
 		}
 	
 		// Pass obstacle
-		if(skill.get_limit() >= obs.get_value() ) {
+		if(skill.get_value() >= obstacle.get_value() ) {
 			System.out.println(
-					_name + " overcomed " + obs.get_name() 
-					+ " with value " + obs.get_value() 
-					+ " using skill: " + skill.getClass().getSimpleName() );
+					get_name() + " overcomed " + obstacle.get_name() 
+					+ " with value " + obstacle.get_value() 
+					+ " using skill: " + skill.typeName() );
 			return true;
 		}else {
 			System.out.println(
-					_name + " did not overcome " + obs.get_name() 
-					+ " with value " + obs.get_value()
-					+ ". Passed only " + skill.get_limit());
+					get_name() + " did not overcome " + obstacle.get_name() 
+					+ " with value " + obstacle.get_value()
+					+ ". Passed only " + skill.get_value());
 			return false;
 		}
 

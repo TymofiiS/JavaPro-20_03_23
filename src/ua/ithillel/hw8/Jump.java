@@ -1,12 +1,10 @@
 package ua.ithillel.hw8;
 
-public class Jump extends Skill {
+public class Jump extends Wall {
 
-	public Jump(Integer limit, String dealWith) {
-		super(limit, dealWith);
+	public Jump(Integer value) {
+		super(value);
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 }

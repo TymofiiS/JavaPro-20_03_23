@@ -1,9 +1,9 @@
 package ua.ithillel.hw8;
 
-public class Swim extends Skill{
+public class Swim extends Pool{
 
-	public Swim(Integer limit, String dealWith) {
-		super(limit, dealWith);
+	public Swim(Integer value) {
+		super(value);
 		// TODO Auto-generated constructor stub
 	}
 
