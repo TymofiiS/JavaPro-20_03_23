@@ -51,12 +51,16 @@
 
 package ua.ithillel.hw8;
 
+import java.util.Map;
+import static java.util.Map.entry; 
+
 public class Test {
 
 	public static void Run() {
 		System.out.println("ua.ithillel.hw8");
 		
 		// Task 0
+		System.out.println("---------------------------");
 		System.out.println("Task0");
 		IAreaCalculable[] arr = {
 		      new Circle(1.0),
@@ -65,7 +69,35 @@ public class Test {
 		};
 		var totalArea = IAreaCalculable.TotalArea(arr);
 		System.out.println("Total area: " + totalArea );
-
+		
+		// Tasks 1-8
+		System.out.println("---------------------------");
+		System.out.println("Tasks 1-8");
+		Map<Obstacle.TypeOverCome, Integer> humanLimits = 
+				Map.ofEntries(
+					entry(Obstacle.TypeOverCome.Jump, 3),
+					entry(Obstacle.TypeOverCome.Run, 100));
+		Map<Obstacle.TypeOverCome, Integer> catLimits = 
+				Map.ofEntries(
+					entry(Obstacle.TypeOverCome.Jump, 3),
+					entry(Obstacle.TypeOverCome.Run, 5));
+		Map<Obstacle.TypeOverCome, Integer> robotLimits = 
+				Map.ofEntries(
+					entry(Obstacle.TypeOverCome.Jump, 1),
+					entry(Obstacle.TypeOverCome.Run, 10));
+		
+		Obstacle[] obstacles = {
+				new Obstacle("wall", 2, Obstacle.TypeOverCome.Jump),
+				new Obstacle("run pass", 50, Obstacle.TypeOverCome.Run),
+			};
+		
+		Participant[] participants = {
+				new Participant(humanLimits, "Human"),
+				new Participant(catLimits, "Cat"),
+				new Participant(robotLimits, "Robot"),
+		};
+		
+		Participant.Competition(obstacles, participants);
 	}
 
 }
