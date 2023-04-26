@@ -4,22 +4,22 @@ import java.util.Map;
 
 public class Participant {
 	
-	private Map<Obstacle.TypeOverCome, Integer> _limits;
+	public Map<String, Integer> _limits;
 	private String _name;
 	
 	public Participant(
-			Map<Obstacle.TypeOverCome, Integer> limits,
+			Map<String, Integer> limits, 
 			String name) {
-		_limits = limits;
 		_name = name;
+		_limits = limits;
 	}
 	
 	public Boolean Overcome(Obstacle obs) {
 		
 		// Find limit value base on obstacle type
 		var limitValue = 0;	
-		for (Map.Entry<Obstacle.TypeOverCome, Integer> entry : _limits.entrySet()) {
-			if(obs.get_tyTypeOverCome() != entry.getKey()) {continue;}
+		for (Map.Entry<String, Integer> entry : _limits.entrySet()) {
+			if(obs.getClass().getSimpleName() != entry.getKey()) {continue;}
 			
 			limitValue = entry.getValue();
 			break;

@@ -73,23 +73,26 @@ public class Test {
 		// Tasks 1-8
 		System.out.println("---------------------------");
 		System.out.println("Tasks 1-8");
-		Map<Obstacle.TypeOverCome, Integer> humanLimits = 
-				Map.ofEntries(
-					entry(Obstacle.TypeOverCome.Jump, 3),
-					entry(Obstacle.TypeOverCome.Run, 100));
-		Map<Obstacle.TypeOverCome, Integer> catLimits = 
-				Map.ofEntries(
-					entry(Obstacle.TypeOverCome.Jump, 3),
-					entry(Obstacle.TypeOverCome.Run, 5));
-		Map<Obstacle.TypeOverCome, Integer> robotLimits = 
-				Map.ofEntries(
-					entry(Obstacle.TypeOverCome.Jump, 1),
-					entry(Obstacle.TypeOverCome.Run, 10));
 		
-		Obstacle[] obstacles = {
-				new Obstacle("wall", 2, Obstacle.TypeOverCome.Jump),
-				new Obstacle("run pass", 50, Obstacle.TypeOverCome.Run),
-			};
+		var wall = new Wall("wall", 2);
+		var runPass = new RunPass("run pass", 50);
+		Obstacle[] obstacles = { wall, runPass};
+		
+		Map<String, Integer> humanLimits = 
+				Map.ofEntries(
+					entry(wall.getClass().getSimpleName(), 3),
+					entry(runPass.getClass().getSimpleName(), 100));
+
+		Map<String, Integer> catLimits = 
+				Map.ofEntries(
+						entry(wall.getClass().getSimpleName(), 2),
+						entry(runPass.getClass().getSimpleName(), 5));
+
+		Map<String, Integer> robotLimits = 
+				Map.ofEntries(
+						entry(wall.getClass().getSimpleName(), 1),
+						entry(runPass.getClass().getSimpleName(), 10));
+
 		
 		Participant[] participants = {
 				new Participant(humanLimits, "Human"),
