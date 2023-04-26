@@ -20,5 +20,7 @@ public class Obstacle {
 		return _value;
 	}
 	
-
+	public String typeName() {
+		return this.getClass().getSimpleName();
+	}
 }

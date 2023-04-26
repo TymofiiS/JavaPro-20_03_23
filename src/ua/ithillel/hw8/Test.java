@@ -51,8 +51,7 @@
 
 package ua.ithillel.hw8;
 
-import java.util.Map;
-import static java.util.Map.entry; 
+import java.util.List; 
 
 public class Test {
 
@@ -75,29 +74,29 @@ public class Test {
 		System.out.println("Tasks 1-8");
 		
 		var wall = new Wall("wall", 2);
-		var runPass = new RunPass("run pass", 50);
-		Obstacle[] obstacles = { wall, runPass};
-		
-		Map<String, Integer> humanLimits = 
-				Map.ofEntries(
-					entry(wall.getClass().getSimpleName(), 3),
-					entry(runPass.getClass().getSimpleName(), 100));
-
-		Map<String, Integer> catLimits = 
-				Map.ofEntries(
-						entry(wall.getClass().getSimpleName(), 2),
-						entry(runPass.getClass().getSimpleName(), 5));
-
-		Map<String, Integer> robotLimits = 
-				Map.ofEntries(
-						entry(wall.getClass().getSimpleName(), 1),
-						entry(runPass.getClass().getSimpleName(), 10));
-
+		var runPass = new RunPass("run pass", 20);
+		var pool = new Pool("pool", 15);
+		Obstacle[] obstacles = { wall, runPass, pool};
 		
 		Participant[] participants = {
-				new Participant(humanLimits, "Human"),
-				new Participant(catLimits, "Cat"),
-				new Participant(robotLimits, "Robot"),
+				new Participant("Human",
+						List.of(
+								new Run(100, runPass.typeName()),
+								new Jump(3, wall.typeName()),
+								new Swim(30, pool.typeName())
+								)
+						),
+				new Participant("Cat",
+						List.of(
+								new Run(20, runPass.typeName()),
+								new Jump(2, wall.typeName())
+								)
+						),
+				new Participant("Robot",
+						List.of(
+								new Run(10, runPass.typeName()),
+								new Jump(2, wall.typeName()))
+								)
 		};
 		
 		Participant.Competition(obstacles, participants);

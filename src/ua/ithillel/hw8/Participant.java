@@ -1,41 +1,53 @@
 package ua.ithillel.hw8;
 
-import java.util.Map;
+import java.util.List;
 
 public class Participant {
 	
-	public Map<String, Integer> _limits;
+	public List<Skill> _skills;
 	private String _name;
 	
 	public Participant(
-			Map<String, Integer> limits, 
-			String name) {
+			String name,
+			List<Skill> skills) {
 		_name = name;
-		_limits = limits;
+		_skills = skills;
 	}
 	
 	public Boolean Overcome(Obstacle obs) {
 		
-		// Find limit value base on obstacle type
-		var limitValue = 0;	
-		for (Map.Entry<String, Integer> entry : _limits.entrySet()) {
-			if(obs.getClass().getSimpleName() != entry.getKey()) {continue;}
+		// Find skill which deal with the obstacle
+		Skill skill = null;
+		for (var entry : _skills) {
 			
-			limitValue = entry.getValue();
+			if(obs.typeName() != entry.get_dealWith())
+			{continue;}
+			
+			// Get skill value
+			skill = entry;
 			break;
+		}
+		
+		// Check if skill exist
+		if(skill == null) {
+			System.out.println(
+					_name + " have no skill for overcome this obstacle: " 
+					+ obs.get_name());
+			return false;
 		}
 	
 		// Pass obstacle
-		if(limitValue >= obs.get_value() ) {
+		if(skill.get_limit() >= obs.get_value() ) {
 			System.out.println(
 					_name + " overcomed " + obs.get_name() 
-					+ " with value " + obs.get_value());
+					+ " with value " + obs.get_value() 
+					+ " using skill: " + skill.getClass().getSimpleName() );
 			return true;
 		}else {
 			System.out.println(
 					_name + " did not overcome " + obs.get_name() 
 					+ " with value " + obs.get_value()
-					+ ". Passed only " + limitValue);
+					+ ". Passed only " + skill.get_limit());
 			return false;
 		}
 
