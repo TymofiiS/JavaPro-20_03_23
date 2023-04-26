@@ -21,8 +21,7 @@ public class Participant {
 		Obstacle skill = null;
 		for (var entry : _skills) {
 			
-			if(obstacle.typeName() != entry.parentName())
-			{continue;}
+			if(!entry.CanDealWith(obstacle)){continue;}
 			
 			// Get skill value
 			skill = entry;
@@ -32,13 +31,15 @@ public class Participant {
 		// Check if skill exist
 		if(skill == null) {
 			System.out.println(
-					get_name() + " have no skill for overcome this obstacle: " 
-					+ obstacle.get_name());
+					get_name() 
+					+ " has no skill for overcome "
+					+ obstacle.get_name() 
+					+ " obstacle");
 			return false;
 		}
 	
 		// Pass obstacle
-		if(skill.get_value() >= obstacle.get_value() ) {
+		if(skill.CanOverCome(obstacle)) {
 			System.out.println(
 					get_name() + " overcomed " + obstacle.get_name() 
 					+ " with value " + obstacle.get_value() 

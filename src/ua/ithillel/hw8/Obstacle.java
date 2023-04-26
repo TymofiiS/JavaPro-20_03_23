@@ -24,4 +24,18 @@ public class Obstacle {
 	public String parentName() {
 		return this.getClass().getSuperclass().getSimpleName();
 	}
+	
+	public Boolean CanDealWith(Obstacle obstacle) {
+		
+		if(obstacle == null) {return false;}
+		
+		return obstacle.typeName() == this.parentName();
+	}
+	
+	public Boolean CanOverCome(Obstacle obstacle) {
+		
+		if(obstacle == null) {return true;}
+		
+		return this.get_value() >= obstacle.get_value();
+	}
 }

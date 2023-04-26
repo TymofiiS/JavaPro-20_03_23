@@ -81,8 +81,8 @@ public class Test {
 		
 		Participant[] participants = {
 				new Human(List.of(new Run(100), new Jump(3), new Swim(30))),
-				new Cat(List.of(new Run(20),new Jump(2))),
-				new Robot(List.of(new Run(10),new Jump(2)))
+				new Cat(List.of(new Run(20), new Jump(2))),
+				new Robot(List.of(new Run(10), new Jump(2)))
 		};
 		
 		Participant.Competition(obstacles, participants);
