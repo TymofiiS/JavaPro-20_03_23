@@ -9,7 +9,7 @@ public class Obstacle {
 		_value = value;
 	}
 
-	public String get_name() {
+	public String name() {
 		return typeName().toLowerCase();
 	}
 
@@ -21,18 +21,18 @@ public class Obstacle {
 		return this.getClass().getSimpleName();
 	}
 	
-	public String parentName() {
+	private String parentName() {
 		return this.getClass().getSuperclass().getSimpleName();
 	}
 	
-	public Boolean CanDealWith(Obstacle obstacle) {
+	public Boolean canDealWith(Obstacle obstacle) {
 		
 		if(obstacle == null) {return false;}
 		
-		return obstacle.typeName() == this.parentName();
+		return this.parentName() == obstacle.typeName();
 	}
 	
-	public Boolean CanOverCome(Obstacle obstacle) {
+	public Boolean canOverCome(Obstacle obstacle) {
 		
 		if(obstacle == null) {return true;}
 		

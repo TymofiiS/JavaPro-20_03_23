@@ -85,7 +85,7 @@ public class Test {
 				new Robot(List.of(new Run(10), new Jump(2)))
 		};
 		
-		Participant.Competition(obstacles, participants);
+		Participant.competition(obstacles, participants);
 	}
 
 }

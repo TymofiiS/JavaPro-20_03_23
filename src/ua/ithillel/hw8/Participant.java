@@ -11,17 +11,17 @@ public class Participant {
 		_skills = skills;
 	}
 	
-	public String get_name() {
+	private String name() {
 		return this.getClass().getSimpleName();
 	}
 	
-	public Boolean Overcome(Obstacle obstacle) {
+	public Boolean overcome(Obstacle obstacle) {
 		
 		// Find skill which deal with the obstacle
 		ISkillable skill = null;
 		for (var entry : _skills) {
 			
-			if(!entry.CanDealWith(obstacle)){continue;}
+			if(!entry.canDealWith(obstacle)){continue;}
 			
 			// Get skill value
 			skill = entry;
@@ -31,23 +31,23 @@ public class Participant {
 		// Check if skill exist
 		if(skill == null) {
 			System.out.println(
-					get_name() 
+					name() 
 					+ " has no skill for overcome "
-					+ obstacle.get_name() 
+					+ obstacle.name() 
 					+ " obstacle");
 			return false;
 		}
 	
 		// Pass obstacle
-		if(skill.CanOverCome(obstacle)) {
+		if(skill.canOverCome(obstacle)) {
 			System.out.println(
-					get_name() + " overcomed " + obstacle.get_name() 
+					name() + " overcomed " + obstacle.name() 
 					+ " with value " + obstacle.get_value() 
 					+ " using skill: " + skill.typeName() );
 			return true;
 		}else {
 			System.out.println(
-					get_name() + " did not overcome " + obstacle.get_name() 
+					name() + " did not overcome " + obstacle.name() 
 					+ " with value " + obstacle.get_value()
 					+ ". Passed only " + skill.get_value());
 			return false;
@@ -55,13 +55,13 @@ public class Participant {
 
 	}
 	
-	public static void Competition(
+	public static void competition(
 			Obstacle[] obstacles, 
 			Participant[] participants ) {
 		
 		for (Participant participant : participants) {
 			for (Obstacle obstacle : obstacles) {
-				var overcome = participant.Overcome(obstacle);
+				var overcome = participant.overcome(obstacle);
 				if(!overcome) {break;}
 			}
 		}
