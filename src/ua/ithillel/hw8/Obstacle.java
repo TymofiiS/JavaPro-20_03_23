@@ -9,15 +9,11 @@ public class Obstacle {
 		_value = value;
 	}
 
-	public String name() {
-		return typeName().toLowerCase();
-	}
-
 	public Integer get_value() {
 		return _value;
 	}
 	
-	public String typeName() {
+	public String name() {
 		return this.getClass().getSimpleName();
 	}
 	
@@ -29,7 +25,7 @@ public class Obstacle {
 		
 		if(obstacle == null) {return false;}
 		
-		return this.parentName() == obstacle.typeName();
+		return this.parentName() == obstacle.name();
 	}
 	
 	public Boolean canOverCome(Obstacle obstacle) {

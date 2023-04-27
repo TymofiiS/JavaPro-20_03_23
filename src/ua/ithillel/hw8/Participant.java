@@ -43,7 +43,7 @@ public class Participant {
 			System.out.println(
 					name() + " overcomed " + obstacle.name() 
 					+ " with value " + obstacle.get_value() 
-					+ " using skill: " + skill.typeName() );
+					+ " using skill " + skill.name() );
 			return true;
 		}else {
 			System.out.println(
