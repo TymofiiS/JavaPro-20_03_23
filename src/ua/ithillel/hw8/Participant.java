@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Participant {
 	
-	public List<Obstacle> _skills;
+	public List<ISkillable> _skills;
 	
 	public Participant(
-			List<Obstacle> skills) {
+			List<ISkillable> skills) {
 		_skills = skills;
 	}
 	
@@ -18,7 +18,7 @@ public class Participant {
 	public Boolean Overcome(Obstacle obstacle) {
 		
 		// Find skill which deal with the obstacle
-		Obstacle skill = null;
+		ISkillable skill = null;
 		for (var entry : _skills) {
 			
 			if(!entry.CanDealWith(obstacle)){continue;}

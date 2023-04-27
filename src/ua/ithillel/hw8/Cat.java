@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Cat extends Participant {
 
-	public Cat(List<Obstacle> skills) {
+	public Cat(List<ISkillable> skills) {
 		super(skills);
 		// TODO Auto-generated constructor stub
 	}
