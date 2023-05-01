@@ -1,0 +1,11 @@
+2023-05-01T16:20:18.078208500 DEBUG Explanation Some message for logging
+2023-05-01T16:20:26.899986300 DEBUG Explanation Some message for logging
+2023-05-01T16:21:57.459471600 DEBUG Explanation: Some message for logging
+2023-05-01T16:21:57.476472500 INFO Explanation: Some data for logging
+2023-05-01T16:21:58.484078200 DEBUG Explanation: Some message for logging
+2023-05-01T16:21:58.503077900 INFO Explanation: Some data for logging
+2023-05-01T16:29:12.028730 DEBUG Explanation: Some message for logging
+2023-05-01T16:29:12.045729300 INFO Explanation: Some data for logging
+2023-05-01T16:29:31.974377 DEBUG Explanation: Some message for logging
+2023-05-01T16:29:46.557785300 DEBUG Explanation: Some message for logging
+2023-05-01T16:29:46.578785600 INFO Explanation: Some data for logging
