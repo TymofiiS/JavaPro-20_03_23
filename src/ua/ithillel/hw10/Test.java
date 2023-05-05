@@ -43,6 +43,18 @@ public class Test {
 		
 		ValueCalculator.useLog = false;
 		
+		
+		System.out.println("No copy arrays");
+		
+		for (int i = 1; i < 10; i++) {
+			new ValueCalculator(10000000,i,2.0);	
+		}
+		
+		
+		System.out.println("\nCopy arrays");
+		
+		ValueCalculator.copyArray = true;
+		
 		for (int i = 1; i < 10; i++) {
 			new ValueCalculator(10000000,i,2.0);	
 		}

@@ -12,6 +12,7 @@ public class ValueCalculator {
 	private Thread[] threads;
 	
 	public static Boolean useLog = false;
+	public static Boolean copyArray = false;
 
 	public ValueCalculator(
 			Integer arrLength,
@@ -24,7 +25,10 @@ public class ValueCalculator {
 		
 		threads = new Thread[this.threadsCount];
 		
-		method();
+		if(copyArray) 
+			{method();}
+		else 
+			{methodNoCopyArray();}
 	}
 	
 	private void initArray() 
@@ -48,14 +52,113 @@ public class ValueCalculator {
 		
 		initArray();
 		
+		var countForOneThread = 
+				getCountElementsForOneThread();
+		
+		var resultArray = new Double[threadsCount][];
+		
 		// Initiate and Run all threads
 		for (int i = 0; i < threads.length; i++) 
 		{
 			var indexLimits = 
 					new Integer[] {
-							i * getCountElementsForOneThread(),
-							(i+1)*getCountElementsForOneThread()};
+							i * countForOneThread,
+							(i+1)*countForOneThread,
+							i};
 			
+			if(indexLimits[0] > arrLength) {continue;}
+			
+			var partArray = 
+					new Double[countForOneThread];		
+				
+			var lenForCopy = 
+					indexLimits[0] + countForOneThread >= arrLength
+					?arrLength - indexLimits[0]
+					:countForOneThread;
+					
+			System.arraycopy(
+					arr, indexLimits[0] , 
+					partArray, 0, lenForCopy);
+
+			
+			// Initiate thread
+			var thread = new Thread(()-> 
+			{
+				logToConsole(Thread.currentThread().getName() 
+						+ " creating for indexes " +
+						indexLimits[0] + " - " + indexLimits[1]);
+				
+				for(int j = 0; j < partArray.length; j++) 
+				{					
+					var value = partArray[j];
+					value = ValueCalculator.calculate(j,value);
+					partArray[j] = value;
+				}
+				
+				resultArray[indexLimits[2]] = partArray;
+						
+			});
+			
+			thread.start();
+			
+			threads[i] = thread;			
+		}
+		
+		// Wait all threads finished
+		for (int i = 0; i < threads.length; i++) 
+		{
+			try 
+			{
+				if(threads[i] == null) {continue;}
+				threads[i].join();
+			} 
+			catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		// Update initial array with calculated data
+		var startIndex = 0;
+		for(int k=0; k<resultArray.length;k++) 
+		{
+			if(resultArray[k] == null) {continue;}
+			
+			var len = 
+					startIndex + resultArray[k].length >= arrLength
+					?arrLength - startIndex
+					:resultArray[k].length;
+					
+			System.arraycopy(
+					resultArray[k], 0, 
+					arr, startIndex, len);
+			
+			startIndex += resultArray[k].length;
+		}
+		
+		printEllapsedTime();
+	}
+	
+	
+	private void methodNoCopyArray() 
+	{	
+		startTime = 
+				System.currentTimeMillis();
+		
+		initArray();
+		
+		var countForOneThread = 
+				getCountElementsForOneThread();
+		
+		// Initiate and Run all threads
+		for (int i = 0; i < threads.length; i++) 
+		{
+			var indexLimits = 
+					new Integer[] {
+							i * countForOneThread,
+							(i+1)*countForOneThread};
+			
+			// Initiate thread
 			var thread = new Thread(()-> 
 			{
 				logToConsole(Thread.currentThread().getName() 
@@ -67,8 +170,8 @@ public class ValueCalculator {
 					var value = this.readArrElement(j);
 					value = ValueCalculator.calculate(j,value);
 					this.writeArrElement(j, value);
-				}
-				
+				}	
+						
 			});
 			
 			thread.start();
