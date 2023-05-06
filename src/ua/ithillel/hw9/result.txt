@@ -1,0 +1,33 @@
+ua.ithillel.hw10 
+
+No copy arrays
+Array length: 50000000; Treads count: 1; Elapsed time: 43271
+Array length: 50000000; Treads count: 2; Elapsed time: 24871
+Array length: 50000000; Treads count: 3; Elapsed time: 20171
+Array length: 50000000; Treads count: 4; Elapsed time: 31662
+Array length: 50000000; Treads count: 5; Elapsed time: 33365
+Array length: 50000000; Treads count: 6; Elapsed time: 32591
+Array length: 50000000; Treads count: 7; Elapsed time: 34216
+Array length: 50000000; Treads count: 8; Elapsed time: 34865
+Array length: 50000000; Treads count: 9; Elapsed time: 33587
+Array length: 50000000; Treads count: 10; Elapsed time: 32940
+Array length: 50000000; Treads count: 11; Elapsed time: 33396
+Array length: 50000000; Treads count: 12; Elapsed time: 33140
+Array length: 50000000; Treads count: 13; Elapsed time: 33480
+Array length: 50000000; Treads count: 14; Elapsed time: 32633
+
+Copy arrays
+Array length: 50000000; Treads count: 1; Elapsed time: 32500
+Array length: 50000000; Treads count: 2; Elapsed time: 19031
+Array length: 50000000; Treads count: 3; Elapsed time: 14075
+Array length: 50000000; Treads count: 4; Elapsed time: 13107
+Array length: 50000000; Treads count: 5; Elapsed time: 12299
+Array length: 50000000; Treads count: 6; Elapsed time: 11672
+Array length: 50000000; Treads count: 7; Elapsed time: 12319
+Array length: 50000000; Treads count: 8; Elapsed time: 11524
+Array length: 50000000; Treads count: 9; Elapsed time: 11654
+Array length: 50000000; Treads count: 10; Elapsed time: 11992
+Array length: 50000000; Treads count: 11; Elapsed time: 11797
+Array length: 50000000; Treads count: 12; Elapsed time: 12099
+Array length: 50000000; Treads count: 13; Elapsed time: 12297
+Array length: 50000000; Treads count: 14; Elapsed time: 11197

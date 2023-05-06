@@ -46,8 +46,8 @@ public class Test {
 		
 		System.out.println("No copy arrays");
 		
-		for (int i = 1; i < 10; i++) {
-			new ValueCalculator(10000000,i,2.0);	
+		for (int i = 1; i < 15; i++) {
+			new ValueCalculator(50000000,i,2.0);	
 		}
 		
 		
@@ -55,8 +55,8 @@ public class Test {
 		
 		ValueCalculator.copyArray = true;
 		
-		for (int i = 1; i < 10; i++) {
-			new ValueCalculator(10000000,i,2.0);	
+		for (int i = 1; i < 15; i++) {
+			new ValueCalculator(50000000,i,2.0);	
 		}
 		
 	}

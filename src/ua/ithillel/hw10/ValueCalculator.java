@@ -10,6 +10,7 @@ public class ValueCalculator {
 	private Long startTime;
 	private Double initValue;
 	private Thread[] threads;
+	private Integer countForOneThread;
 	
 	public static Boolean useLog = false;
 	public static Boolean copyArray = false;
@@ -24,6 +25,9 @@ public class ValueCalculator {
 		this.initValue = initValue;
 		
 		threads = new Thread[this.threadsCount];
+		
+		countForOneThread = 
+				getCountElementsForOneThread();
 		
 		if(copyArray) 
 			{method();}
@@ -52,9 +56,6 @@ public class ValueCalculator {
 		
 		initArray();
 		
-		var countForOneThread = 
-				getCountElementsForOneThread();
-		
 		var resultArray = new Double[threadsCount][];
 		
 		// Initiate and Run all threads
@@ -68,6 +69,8 @@ public class ValueCalculator {
 			
 			if(indexLimits[0] > arrLength) {continue;}
 			
+			
+			// Prepare part of data for this thread
 			var partArray = 
 					new Double[countForOneThread];		
 				
@@ -118,6 +121,7 @@ public class ValueCalculator {
 			}
 		}
 		
+		
 		// Update initial array with calculated data
 		var startIndex = 0;
 		for(int k=0; k<resultArray.length;k++) 
@@ -136,7 +140,9 @@ public class ValueCalculator {
 			startIndex += resultArray[k].length;
 		}
 		
-		printEllapsedTime();
+		
+		// Print elapsed time
+		printElapsedTime();
 	}
 	
 	
@@ -146,9 +152,6 @@ public class ValueCalculator {
 				System.currentTimeMillis();
 		
 		initArray();
-		
-		var countForOneThread = 
-				getCountElementsForOneThread();
 		
 		// Initiate and Run all threads
 		for (int i = 0; i < threads.length; i++) 
@@ -192,7 +195,9 @@ public class ValueCalculator {
 			}
 		}
 		
-		printEllapsedTime();
+		
+		// Print elapsed time
+		printElapsedTime();
 	}
 	
 	public synchronized Double readArrElement(
@@ -216,7 +221,7 @@ public class ValueCalculator {
 		arr[index] = value;
 	}
 	
-	private void printEllapsedTime() 
+	private void printElapsedTime() 
 	{
 		var dif = 
 				System.currentTimeMillis() - startTime;
@@ -224,7 +229,7 @@ public class ValueCalculator {
 		System.out.println(
 				"Array length: " + arrLength + 
 				"; Treads count: " + threadsCount +
-				"; Ellapsed time: " + dif );
+				"; Elapsed time: " + dif );
 	}
 	
 	public static void logToConsole(String str) 
