@@ -1,6 +1,6 @@
 package ua.ithillel;
 
-import ua.ithillel.hw10.Test;
+import ua.ithillel.hw11.Test;
 
 public class Main {
 
