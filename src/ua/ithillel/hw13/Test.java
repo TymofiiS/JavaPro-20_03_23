@@ -78,8 +78,6 @@ public class Test {
 		
 		// Delete by path
 		fileNavigator.remove("/path1/subpath1/");
-		
-		// Sort by size
 		System.out.println(fileNavigator.sortBySize());
 		
 		// Filter by size

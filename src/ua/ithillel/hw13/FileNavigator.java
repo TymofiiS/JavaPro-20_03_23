@@ -16,7 +16,7 @@ public class FileNavigator {
 	
 	public List<FileData> filterBySize(Integer size){
 		
-		if(size == null) return null;
+		if(size == null) {return null;}
 		
 		var allFilesData = sortBySize();
 		if(allFilesData == null) {return null;}
