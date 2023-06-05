@@ -18,9 +18,9 @@ public class InitializerBD {
    static final String createHomeworkTableQuery = 
 		   "CREATE TABLE IF NOT EXISTS `homework` (\r\n"
 		   
-		   + "  `id` int NOT NULL AUTO_INCREMENT,\r\n"
-		   + "  `name` varchar(25),\r\n"
-		   + "  `description` varchar(255),\r\n"
+		   + "  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\r\n"
+		   + "  `name` varchar(25) NOT NULL,\r\n"
+		   + "  `description` varchar(255) NOT NULL,\r\n"
 		   
 		   + "  PRIMARY KEY (`id`)\r\n"
 		   + ")"; 
@@ -28,14 +28,36 @@ public class InitializerBD {
    static final String createLessonTableQuery = 
 		   "CREATE TABLE IF NOT EXISTS `lesson` (\r\n"
 		   
-		   + "  `id` int NOT NULL AUTO_INCREMENT,\r\n"
-		   + "  `name` varchar(25),\r\n"
-		   + "  `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\r\n"
-           + "  `homework_id` int,\r\n"
+		   + "  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\r\n"
+		   + "  `name` varchar(25) NOT NULL,\r\n"
+		   + "  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\r\n"
+           + "  `homework_id` INT UNSIGNED,\r\n"
 		   
 		   + " PRIMARY KEY (`id`),\r\n"
 		   + " FOREIGN KEY (`homework_id`) REFERENCES `homework` (`id`)"
 		   + ")"; 
+   
+   static final String createScheduleTableQuery = 
+		   "CREATE TABLE IF NOT EXISTS `schedule` (\r\n"
+		   
+		   + "  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\r\n"
+		   + "  `name` varchar(25) NOT NULL,\r\n"
+		   + "  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\r\n"
+		   
+		   + "  PRIMARY KEY (`id`)\r\n"
+		   + ")"; 
+   
+   static final String createScheduledLessonsTableQuery = 
+		   "CREATE TABLE IF NOT EXISTS `scheduled_lessons` (\r\n"
+		   
+		   + "  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\r\n"
+		   + "  `schedule_id` INT UNSIGNED NOT NULL,\r\n"
+		   + "  `lesson_id` INT UNSIGNED NOT NULL,\r\n"
+		   
+		   + " PRIMARY KEY (`id`),\r\n"
+		   + " FOREIGN KEY (`schedule_id`) REFERENCES `schedule` (`id`),\r\n"
+		   + " FOREIGN KEY (`lesson_id`) REFERENCES `lesson` (`id`)\r\n"
+		   + ")";
    
    
    public static void CreateBd()
@@ -65,11 +87,58 @@ public class InitializerBD {
          
          stmt.executeUpdate(createLessonTableQuery);
          System.out.println("Table Lesson created successfully...");  
+         
+         stmt.executeUpdate(createScheduleTableQuery);
+         System.out.println("Table Schedule created successfully..."); 
+         
+         stmt.executeUpdate(createScheduledLessonsTableQuery);
+         System.out.println("Table ScheduledLessons created successfully...");         
         
       } catch (SQLException e) {
          e.printStackTrace();
       } 
    }
    
+   
+   public static void InitTablesWithDemoData()
+   {	      
+      try(Connection conn = DriverManager.getConnection(
+    		  DB_URL + "LearningProcess", USER, PASS);
+    		  Statement stmt = conn.createStatement();
+      ) {
+    	  // Homework
+    	  String tableNameString = "homework";
+    	  for (int i = 0; i < 10; i++) {	
+	          String sql = 
+	        		  "INSERT INTO " + tableNameString 
+	        		  + " (`name`, `description`) VALUES ("
+	        		  + "\"" + tableNameString + "_name_" + i + "\", "
+	        		  + "\"" + tableNameString + "_description_" + i + "\""
+	        		  + ")";
+	          stmt.executeUpdate(sql);
+    	  }
+    	  System.out.println("Table Homework initialized with demo data.");
+    	    
+    	  // Schedule
+    	  tableNameString = "schedule";
+    	  for (int i = 0; i < 10; i++) {	
+	          String sql = 
+	        		  "INSERT INTO " + tableNameString 
+	        		  + " (`name`) VALUES ("
+	        		  + "\"" + tableNameString + "_name_" + i + "\""
+	        		  + ")";
+	          stmt.executeUpdate(sql);
+    	  }
+    	  System.out.println("Table Schedule initialized with demo data.");
+    	  
+    	  // Lesson
+    	  
+    	  // ScheduledLessons
+    
+        
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
    
 }

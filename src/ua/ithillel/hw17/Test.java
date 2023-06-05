@@ -34,5 +34,7 @@ public class Test {
 		// Create Tables
 		InitializerBD.CreateTables();
 
+		// Init with demo data
+		InitializerBD.InitTablesWithDemoData();
 	}
 }
