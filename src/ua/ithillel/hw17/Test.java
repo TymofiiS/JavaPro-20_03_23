@@ -36,5 +36,12 @@ public class Test {
 
 		// Init with demo data
 		InitializerBD.InitTablesWithDemoData();
+		
+		// Print all home works by schedule name
+		InitializerBD.PrintAllHomeWorksByScheduleName(
+				"schedule_name_3");
+		
+		// Create file with DDL commands
+		InitializerBD.PrintDDLIntoFile("init.sql");
 	}
 }
