@@ -12,9 +12,9 @@ import java.util.Random;
 
 public class InitializerBD {
 	
-   static final String DB_URL = "jdbc:mysql://localhost:3306/";
-   static final String USER = "JavaDbManager";
-   static final String PASS = "(yLG26&%upd56";
+   static protected String DB_URL = "jdbc:mysql://localhost:3306/";
+   static protected String USER = "JavaDbManager";
+   static protected String PASS = "(yLG26&%upd56";
    
    static final String createBdQuery = 
 		   "CREATE DATABASE IF NOT EXISTS LearningProcess";
