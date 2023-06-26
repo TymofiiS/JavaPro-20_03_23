@@ -3,6 +3,7 @@ package ua.ithillel.hw_orm;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Optional;
 
 public class CashedFields {
@@ -11,16 +12,21 @@ public class CashedFields {
 	{
 		if(reflectionFieldsData == null) {
 			InitReflectionData(this.getClass());
+			System.out.println("Filling outing reflected data");
 		}
+		else {System.out.println("Already filling out reflected data");}
 	}
     
-	static public Map<String, Field> reflectionFieldsData;
+	static private Map<String, Field> reflectionFieldsData;
 	
-	static public <T> void InitReflectionData(Class<T> type) {
+	public static Map<String, Field> getReflectionFieldsData() {
+		return reflectionFieldsData;
+	}
+
+	static private <T> void InitReflectionData(Class<T> type) {
 		
 		Field[] fields = type.getDeclaredFields();
-		
-		
+		reflectionFieldsData = new HashMap<>();
 		
 		 for (Field field : fields) {
 	
@@ -36,9 +42,9 @@ public class CashedFields {
 	                     .map(column -> column.name())
 	                     .filter(name -> name != null && !name.isEmpty())
 	                     .orElse(fieldName);
-		 }
-		 
-		 
+	         
+	         reflectionFieldsData.put(columnName, field);
+		 } 
 	}
 
 }
