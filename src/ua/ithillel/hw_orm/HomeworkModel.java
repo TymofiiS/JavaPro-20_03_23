@@ -1,7 +1,7 @@
 package ua.ithillel.hw_orm;
 
-public class Homework extends CashedFields {
-
+public class HomeworkModel{
+	
 	@Column(name = "id")
 	private int homeworkId;
 

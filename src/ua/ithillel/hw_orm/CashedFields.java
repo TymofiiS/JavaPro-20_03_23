@@ -8,25 +8,26 @@ import java.util.Optional;
 
 public class CashedFields {
 	
-	// Initiate reflection data of fields
-	{
-		if(reflectionFieldsData == null) {
-			InitReflectionData(this.getClass());
-			System.out.println("Filling outing reflected data");
-		}
-		else {System.out.println("Already filling out reflected data");}
-	}
-    
-	static private Map<String, Field> reflectionFieldsData;
+	private static Map<String, Map<String, Field>> reflectionFieldsData;
 	
-	public static Map<String, Field> getReflectionFieldsData() {
-		return reflectionFieldsData;
+	public static <T> Map<String, Field> getReflectionFieldsData(
+			Class<T> type) {
+		
+		if(reflectionFieldsData == null) {
+			reflectionFieldsData = new HashMap<>();
+		}
+		
+		if(!reflectionFieldsData.containsKey(type.getTypeName())) {		
+			InitReflectionData(type);
+		}
+		
+		return reflectionFieldsData.get(type.getTypeName());
 	}
 
 	static private <T> void InitReflectionData(Class<T> type) {
 		
 		Field[] fields = type.getDeclaredFields();
-		reflectionFieldsData = new HashMap<>();
+		Map<String, Field> temp = new HashMap<>();
 		
 		 for (Field field : fields) {
 	
@@ -43,8 +44,10 @@ public class CashedFields {
 	                     .filter(name -> name != null && !name.isEmpty())
 	                     .orElse(fieldName);
 	         
-	         reflectionFieldsData.put(columnName, field);
+	         temp.put(columnName, field);
 		 } 
+		 
+		 reflectionFieldsData.put(type.getTypeName(), temp);
 	}
 
 }

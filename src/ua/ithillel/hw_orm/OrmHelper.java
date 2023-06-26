@@ -18,20 +18,33 @@ public  class OrmHelper extends InitializerBD {
 	
 	 public static void PrintAllQueriesResults()
 	 {		
-		 // Print all Homework instances
-		 String sql = "select * from ?";
-		 Object[] params = {"learningprocess.homework"};
-		 List<Homework> homeworks = fillingOutListObjFromBd(
-				 Homework.class, sql, params);
+		 // Filtered Homework instances
+		 String sql = "select * from homework where Name = ?";
+		 Object[] params = {"homework_name_2"};
+		 List<HomeworkModel> homeworks = fillingOutListObjFromBd(
+				 HomeworkModel.class, sql, params);
 	     
 	   	  System.out.println(
-				  "\nAll HomeWork instances:");
-	   	  for (Homework homework : homeworks) {
+				  "\nFiltered HomeWork instances:");
+	   	  for (HomeworkModel homework : homeworks) {
 	   		System.out.println(homework);
+	   	  }
+	   	  
+	   	  
+		 // Filtered Schedule instances
+		 sql = "select * from schedule where id > ?";
+		 Object[] params1 = {15};
+		 List<ScheduleModel> shcedules = fillingOutListObjFromBd(
+				 ScheduleModel.class, sql, params1);
+	     
+	   	  System.out.println(
+				  "\nFiltered Schedule instances:");
+	   	  for (ScheduleModel shcedule : shcedules) {
+	   		System.out.println(shcedule);
 	   	  }
 	 }
 	 
-	 private static <T extends CashedFields> List<T> fillingOutListObjFromBd(
+	 private static <T> List<T> fillingOutListObjFromBd(
 			 Class<T> type,
 			 String sql,
 			 Object... params) {
@@ -43,37 +56,48 @@ public  class OrmHelper extends InitializerBD {
 			  PreparedStatement st = prepareStatement(
 					  conn, sql, params);
 			  ResultSet rs = st.executeQuery();
-	      ) {
+	    	) {	   
 	    	 
-	    	 try {
+	    	 while (rs.next()) {
 	    		 
-				T obj = type.getDeclaredConstructor().newInstance();
-				var reflectionData = obj.getReflectionFieldsData();
-				
-				for (Map.Entry<String, Field> entry : reflectionData.entrySet()) {
-					
-                	entry.getValue().setAccessible(true);
-                	
-                	Object fieldValue = fieldValueFromResultSet(
-                					entry.getValue().getType(), 
-                					entry.getKey(), 
-                					rs);
-                    try {
-                    	entry.getValue().set(obj, fieldValue);         
-                    }catch (Exception e) {
-                        throw new RuntimeException(
-                        		"Cannot set value for column " + 
-                        				entry.getKey(), e);
-                    }finally {
-                    	entry.getValue().setAccessible(false);
-                    }		    
-				}			
-				
-			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-				e.printStackTrace();
-			}
-
+	    		 try {
+		    		
+	    			// Create object using reflection
+	 				T obj = type.getDeclaredConstructor().newInstance();
+	 				
+	 				// Get reflection fields data
+	 				var reflectionData = 
+	 						CashedFields.getReflectionFieldsData(type);
+	 				
+	 				// Iterate via each field data and filling out it by query result
+	 				for (Map.Entry<String, Field> entry : reflectionData.entrySet()) {
+	 					
+	                 	entry.getValue().setAccessible(true);
+	                 	
+	                 	Object fieldValue = fieldValueFromResultSet(
+	                 					entry.getValue().getType(), 
+	                 					entry.getKey(), 
+	                 					rs);
+	                     try {
+	                     	entry.getValue().set(obj, fieldValue);         
+	                     }catch (Exception e) {
+	                         throw new RuntimeException(
+	                         		"Cannot set value for column: " + 
+	                         				entry.getValue().getName(), e);
+	                     }finally {
+	                     	entry.getValue().setAccessible(false);
+	                     }		    
+	 				}
+	 				
+	 				// Add object to result
+	 				result.add(obj);
+	 				
+	 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+	 					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+	 				e.printStackTrace();
+	 			}
+	    	 }
+	    	 
 	      } catch (SQLException e) {
 	         e.printStackTrace();
 	      } 
