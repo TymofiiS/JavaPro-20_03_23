@@ -29,11 +29,15 @@ public class TestRunner {
 		// Invoke each method
 		for (Method method : methods) {
 			try {
+				method.setAccessible(true);
 				method.invoke(obj);
 			} catch (IllegalAccessException | 
 					IllegalArgumentException | 
 					InvocationTargetException e) {
 				e.printStackTrace();
+			}
+			finally {
+				method.setAccessible(false);
 			}
 		}	
 	}
@@ -50,7 +54,7 @@ public class TestRunner {
 		
 		// Get BeforeSuiteCustom and ensure only one
 		List<Method> bss = 
-				Arrays.asList(type.getMethods())
+				Arrays.asList(type.getDeclaredMethods())
 				.stream()
 				.filter(x->
 					x.getAnnotationsByType(BeforeSuiteCustom.class).length > 0)
@@ -61,7 +65,7 @@ public class TestRunner {
 		
 		// Get TestCustom and ensure more then zero
 		List<Method> tss = 
-				Arrays.asList(type.getMethods())
+				Arrays.asList(type.getDeclaredMethods())
 				.stream()
 				.filter(x->
 					x.getAnnotationsByType(TestCustom.class).length > 0)
@@ -76,7 +80,7 @@ public class TestRunner {
 		
 		// Get AfterSuiteCustom and ensure only one
 		List<Method> ass = 
-				Arrays.asList(type.getMethods())
+				Arrays.asList(type.getDeclaredMethods())
 				.stream()
 				.filter(x->
 					x.getAnnotationsByType(AfterSuiteCustom.class).length > 0)

@@ -17,7 +17,7 @@ public class TestClassCorrect {
 	}
 	
 	@TestCustom(priority = 1)
-	public void test1() {
+	private void test1() {
 		System.out.println("test1 invoked");			
 	}
 	
