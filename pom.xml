@@ -7,9 +7,11 @@
   <packaging>jar</packaging>
 
   <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+		<junit.jupiter.version>5.8.1</junit.jupiter.version>
+		<junit.platform.version>1.8.1</junit.platform.version>
   </properties>
   
   <dependencies>
@@ -19,6 +21,14 @@
 	    <artifactId>mysql-connector-java</artifactId>
 	    <version>8.0.33</version>
 	</dependency>
+	
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.9.3</version>
+      
+    </dependency>
+    
   </dependencies>
     
   <build>
@@ -26,6 +36,7 @@
   	<finalName>${project.artifactId}</finalName>
 	  
     <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>src/unit/tests</testSourceDirectory>
     
     <resources>
       <resource>
@@ -45,6 +56,15 @@
           <release>17</release>
         </configuration>
       </plugin>
+      
+        <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M7</version>
+        </plugin>
+        <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>3.0.0-M7</version>
+        </plugin>
       
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>     
